@@ -1,7 +1,13 @@
 import { createStore } from "@reduxjs/toolkit";
 import { Action, AnyAction } from "redux";
-import { SadState, initailSadState } from "./reducers/Sadreducer";
-import { HappyState, initailHappyState } from "./reducers/Happyreducer";
+import SadStateReducerfunction, {
+  SadState,
+  initailSadState,
+} from "./reducers/Sadreducer";
+import HappyStateReducerfunction, {
+  HappyState,
+  initailHappyState,
+} from "./reducers/Happyreducer";
 export type Moments = {
   points: number;
   date: Date;
@@ -21,29 +27,10 @@ function reducer(
   action: AnyAction
 ): State {
   console.log("fucntion is called:", action);
-  if (action.type == "SadClicked") {
-    return {
-      ...previousState,
-      sadState: [
-        ...previousState.sadState,
-        { points: action.payload.point, date: action.payload.date },
-      ],
-    };
-  } else if (action.type == "HappyClicked") {
-    console.log("reducre happ cliek calles", action.payload.date);
-    return {
-      ...previousState,
-      happyState: [
-        ...previousState.happyState,
-        { points: action.payload.point, date: action.payload.date },
-      ],
-    };
-  } else if (action.type == "resetData") {
-    const happydata: Moments[] = [];
-    const saddata: Moments[] = [];
-    return { ...previousState, happyState: happydata, sadState: saddata };
-  }
-  return previousState;
+  return {
+    sad: SadStateReducerfunction(previousState.sad, action),
+    happy: HappyStateReducerfunction(previousState.happy, action),
+  };
 }
 
 const store = createStore(
