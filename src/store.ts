@@ -1,37 +1,19 @@
 import { createStore } from "@reduxjs/toolkit";
-import { Action, AnyAction } from "redux";
-import SadStateReducerfunction, {
-  SadState,
-  initailSadState,
-} from "./reducers/Sadreducer";
-import HappyStateReducerfunction, {
-  HappyState,
-  initailHappyState,
-} from "./reducers/Happyreducer";
+import { Action, AnyAction, combineReducers } from "redux";
+import SadStateReducerfunction from "./reducers/Sadreducer";
+import HappyStateReducerfunction from "./reducers/Happyreducer";
+import { Reducer } from "react";
 export type Moments = {
   points: number;
   date: Date;
 };
-export type State = {
-  sad: SadState;
-  happy: HappyState;
-};
 
-const initialState = {
-  sad: initailSadState,
-  happy: initailHappyState,
-};
+const reducer = combineReducers({
+  sad: SadStateReducerfunction,
+  happy: HappyStateReducerfunction,
+});
 
-function reducer(
-  previousState: State = initialState,
-  action: AnyAction
-): State {
-  console.log("fucntion is called:", action);
-  return {
-    sad: SadStateReducerfunction(previousState.sad, action),
-    happy: HappyStateReducerfunction(previousState.happy, action),
-  };
-}
+export type State = ReturnType<typeof reducer>;
 
 const store = createStore(
   reducer,
