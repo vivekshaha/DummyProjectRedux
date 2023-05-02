@@ -3,6 +3,7 @@ import { Action, AnyAction, combineReducers } from "redux";
 import SadStateReducerfunction from "./reducers/Sadreducer";
 import HappyStateReducerfunction from "./reducers/Happyreducer";
 import { Reducer } from "react";
+import pruductreducer from "./reducers/Productreducer";
 export type Moments = {
   points: number;
   date: Date;
@@ -11,6 +12,7 @@ export type Moments = {
 const reducer = combineReducers({
   sad: SadStateReducerfunction,
   happy: HappyStateReducerfunction,
+  product: pruductreducer,
 });
 
 export type State = ReturnType<typeof reducer>;

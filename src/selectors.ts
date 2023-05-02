@@ -6,3 +6,10 @@ export const happyIncSelctor = (state: State) => {
 export const sadIncSelctor = (state: State) => {
   return state.sad.sadMoments;
 };
+export const poroductloadingslector = (state: State) => {
+  return state.product.loading;
+};
+export const poroductloadedselector = (state: State) => {
+  console.log("thi si oo", state.product.products);
+  return state.product.products;
+};
