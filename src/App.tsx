@@ -1,56 +1,18 @@
 import React, { useEffect, useState } from "react";
-import Button from "./Button";
-import HappyTracker from "./HappyTracker";
-import SadTracker from "./SadTracker";
-import HappyInc from "./HappyInc";
-import SadInc from "./SadInc";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  ProductloadedAction,
-  ProductloadingAction,
-  Resetdataclicked,
-} from "./actions";
-import axios from "axios";
-import { poroductloadedselector, poroductloadingslector } from "./selectors";
+import { Route, Routes } from "react-router-dom";
+import Productlist from "./Productlist";
+import OrderDetail from "./OrderDetail";
+import Orderlist from "./Orderlist";
+
 function App() {
   // const [prod, setProduct] = useState([]);
-  const dispatch = useDispatch();
-  function resetdata() {
-    dispatch(Resetdataclicked);
-  }
-  useEffect(() => {
-    dispatch(ProductloadingAction());
-    axios.get("https://myeasykart.codeyogi.io/products").then((response) => {
-      dispatch(ProductloadedAction(response.data.data));
-    });
-  }, []);
-  useEffect(() => {}, []);
-
-  const loading = useSelector(poroductloadingslector);
-  const products = useSelector(poroductloadedselector);
-  // console.log("this i sapp", products);
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
   return (
     <div className="flex justify-center">
-      <div className="bg-gray-400 rounded-md ">
-        {loading &&
-          products?.map((p) => {
-            return <div key={p.id}>{p.title}</div>;
-          })}
-        <h1 className="text-3xl text-center text-bold">Mood Tracker</h1>
-        {!loading &&
-          products?.map((p) => {
-            return <div key={p.id}>{p.title}</div>;
-          })}
-        {/* <Button onClick={resetdata}>App Reset</Button>
-        <HappyTracker />
-        <SadTracker />
-        <HappyInc />
-        <SadInc /> */}
-      </div>
+      <Routes>
+        <Route index element={<Productlist />} />
+        <Route path="/order/" element={<Orderlist />} />
+        <Route path="/order/:orderId" element={<OrderDetail />} />
+      </Routes>
     </div>
   );
 }

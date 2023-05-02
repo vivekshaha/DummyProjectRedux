@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Button from "./Button";
 import { useDispatch } from "react-redux";
-import { sadButtonClicked } from "./actions";
+import { sadButtonClicked } from "./actions/mood-action.ts";
 
 const SadInc = () => {
   const [points, setPoints] = useState(0);

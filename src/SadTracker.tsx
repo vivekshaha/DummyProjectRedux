@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Button from "./Button";
 import { useSelector } from "react-redux";
-import { sadIncSelctor } from "./selectors";
+import { sadIncSelctor } from "./selectors/selectors";
 
 const SadTracker = () => {
   const sadarr = useSelector(sadIncSelctor);

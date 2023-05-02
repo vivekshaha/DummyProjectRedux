@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Button from "./Button";
 import { useDispatch } from "react-redux";
-import { happyButtonClicked } from "./actions";
+import { happyButtonClicked } from "./actions/mood-action.ts";
 
 const HappyInc = () => {
   const [points, setPoints] = useState<number>(0);

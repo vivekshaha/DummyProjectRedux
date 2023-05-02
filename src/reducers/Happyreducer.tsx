@@ -1,6 +1,9 @@
 import { AnyAction } from "redux";
 import { Moments } from "../store";
-import { HAPPY_BUTTON_CLICKED, RESET_DATA_CLICKED } from "../actions";
+import {
+  HAPPY_BUTTON_CLICKED,
+  RESET_DATA_CLICKED,
+} from "../actions/mood-action.ts";
 import { produce } from "immer";
 
 export type HappyState = {

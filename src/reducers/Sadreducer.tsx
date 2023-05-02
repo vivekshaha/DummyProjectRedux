@@ -1,6 +1,9 @@
 // import { AnyAction } from "redux";
 import { Moments } from "../store";
-import { RESET_DATA_CLICKED, SAD_BUTTON_CLICKED } from "../actions";
+import {
+  RESET_DATA_CLICKED,
+  SAD_BUTTON_CLICKED,
+} from "../actions/mood-action.ts";
 import { AnyAction } from "redux";
 import { produce } from "immer";
 

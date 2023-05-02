@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { happyIncSelctor } from "./selectors";
+import { happyIncSelctor } from "./selectors/selectors";
 
 const HappyTracker = () => {
   const happyarr = useSelector(happyIncSelctor);
