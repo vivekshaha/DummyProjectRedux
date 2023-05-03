@@ -2,7 +2,8 @@ import { AnyAction } from "redux";
 import { PRODUCT_LOADED, PRODUCT_LOADING } from "../actions/products";
 import { produce } from "immer";
 import { product } from "../models/Products";
-import { ORDERS_LOADED } from "../actions/orders";
+import { ORDERS_DETAIL_LOADED, ORDERS_LOADED } from "../actions/orders";
+import { normalize, schema } from "normalizr";
 
 type NormalizeProduct = {
   [id: number]: product;
@@ -10,11 +11,13 @@ type NormalizeProduct = {
 type producdata = {
   products: NormalizeProduct;
   loading: boolean;
+  // order_proudut: { [orderid: number]: number[] };
 };
 
 const State: producdata = {
   loading: false,
   products: {},
+  // order_proudut: {},
 };
 
 function pruductreducer(currentState = State, action: AnyAction): producdata {
@@ -56,12 +59,16 @@ function pruductreducer(currentState = State, action: AnyAction): producdata {
         {});
         draft.products = normalizedproduct;
       });
+    case ORDERS_DETAIL_LOADED:
+      return produce(currentState, (draft) => {
+        const order = action.payload;
+        // console.log(order);
+        const productEntity = new schema.Entity("products");
+        const data = normalize(order.products, [productEntity]);
+        // console.log("normalexe dta", data);
+        draft.products = { ...draft.products, ...data.entities.products };
+      });
 
-    //   {
-    //     ...currentState,
-    //     loading: false,
-    //     products: [action.payload.products],
-    //   };
     default:
       return State;
   }

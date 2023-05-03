@@ -29,7 +29,7 @@ const Orderlist = () => {
             <Link to={"/order/" + o.id} className="text-yellow-300 ">
               {o.id}
             </Link>{" "}
-            {o.totalQuantity}
+            {o.totalProducts}
           </h1>
         );
       })}
